@@ -24,6 +24,7 @@ namespace SimpleCodingChallenge.API.Controllers
         public async Task<ActionResult<List<EmployeeDto>>> Index()
         {
             var result = await mediator.Send(new GetAllEmployeesCommand());
+            var a= result.EmployeeList;
             return result.EmployeeList;
         }
 

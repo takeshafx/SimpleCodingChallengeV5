@@ -26,6 +26,15 @@ namespace SimpleCodingChallenge.DataAccess.Entity
                 return age;
             }
         }
+
+        public string FullName
+        {
+            get
+            {
+                var fullName = String.Concat(FirstName," ", LastName);
+                return fullName;
+            }
+        }
     }
 
     public sealed class EmployeeEntityDescriptor : IEntityTypeConfiguration<Employee>
