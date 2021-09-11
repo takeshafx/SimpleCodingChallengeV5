@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using SimpleCodingChallenge.Business.Actions.Employees;
 using SimpleCodingChallenge.Common.DTO;
+using SimpleCodingChallenge.DataAccess.Database;
+using SimpleCodingChallenge.DataAccess.Entity;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,10 +16,12 @@ namespace SimpleCodingChallenge.API.Controllers
     public class EmployeesController : Controller
     {
         private readonly IMediator mediator;
+        private readonly SimpleCodingChallengeDbContext _context;
 
-        public EmployeesController(IMediator mediator)
+        public EmployeesController(IMediator mediator, SimpleCodingChallengeDbContext context)
         {
             this.mediator = mediator;
+            _context = context;
         }
 
         [HttpGet]
@@ -24,13 +29,62 @@ namespace SimpleCodingChallenge.API.Controllers
         public async Task<ActionResult<List<EmployeeDto>>> Index()
         {
             var result = await mediator.Send(new GetAllEmployeesCommand());
-            var a= result.EmployeeList;
             return result.EmployeeList;
         }
 
-        public async Task<ActionResult<EmployeeDto>> Create()
+        [HttpGet("{id}")]
+        public async Task<ActionResult<EmployeeDto>> GetEmployee(long id)
         {
-            return null;
+            var todoItem = await _context.Employees.FindAsync(id);
+
+            if (todoItem == null)
+            {
+                return NotFound();
+            }
+
+            return EmployeeToDTO(todoItem);
         }
+
+        [HttpPost]
+        [Route("")]
+        public async Task<ActionResult<EmployeeDto>> Create(EmployeeDto employeeDto)
+        {
+            var employee = new Employee
+            {
+                EmployeeID = employeeDto.EmployeeID,
+                FirstName = employeeDto.FirstName,
+                LastName = employeeDto.LastName,
+                //FullName = employeeDto.FullName,
+                Address = employeeDto.Address,
+                Email = employeeDto.Email,
+                BirthDate = DateTime.Parse(employeeDto.BirthDate),
+                JobTitle = employeeDto.JobTitle,
+                Salary = employeeDto.Salary,
+                Department = employeeDto.Department,
+
+            };
+            _context.Employees.Add(employee);
+            await _context.SaveChangesAsync();
+
+
+            return CreatedAtAction(nameof(GetEmployee), new { id = employee.EmployeeID }, EmployeeToDTO(employee));
+        }
+
+        private static EmployeeDto EmployeeToDTO(Employee employee) =>
+        new EmployeeDto
+        {
+            EmployeeID = employee.EmployeeID,
+            FirstName = employee.FirstName,
+            LastName = employee.LastName,
+        //FullName = employeeDto.FullName,
+            Address = employee.Address,
+            Email = employee.Email,
+            BirthDate =employee.BirthDate.ToString(),
+            JobTitle = employee.JobTitle,
+            Salary = employee.Salary,
+            Department = employee.Department,
+        };
     }
+
 }
+

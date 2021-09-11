@@ -16,5 +16,6 @@ namespace SimpleCodingChallenge.DataAccess.Database
         }
 
         public DbSet<Employee> Employees { get; set; }
+        public object Employee { get; set; }
     }
 }

@@ -7,9 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCodingChallenge.API",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCodingChallenge.Business", "SimpleCodingChallenge.Business\SimpleCodingChallenge.Business.csproj", "{3830CA03-FE11-4EAC-9D99-BAF68C157DF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCodingChallenge.DataAccess", "SimpleCodingChallenge.DataAccess\SimpleCodingChallenge.DataAccess.csproj", "{3E2F425B-A8E0-4259-AFA7-C182ACEAC455}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCodingChallenge.DataAccess", "SimpleCodingChallenge.DataAccess\SimpleCodingChallenge.DataAccess.csproj", "{3E2F425B-A8E0-4259-AFA7-C182ACEAC455}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCodingChallenge.Common", "SimpleCodingChallenge.Common\SimpleCodingChallenge.Common.csproj", "{4D89A6E6-2FD5-41CC-BF4F-6315F5CF9DF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCodingChallenge.Common", "SimpleCodingChallenge.Common\SimpleCodingChallenge.Common.csproj", "{4D89A6E6-2FD5-41CC-BF4F-6315F5CF9DF2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CFDA79C5-7601-439F-8206-CC07F800F86C}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
